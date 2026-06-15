@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Galeri Batik-Batik | Payment</title>
+        <link rel="stylesheet" href="payment.css">
+        <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    </head>
+<body>
+    <div class="header">
+    <div class="container">
+        <div class="navbar">
+            <div class="logo">
+                <img src="img/logo.png" width="125px">
+            </div>
+            <nav>
+                <ul id="MenuItems">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="products.html">Products</a></li>
+                    <li><a href="gallery.html">Gallery</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                    <li><a href="location.html">Location</a></li>
+                    <li><a href="account.html">Account</a></li>
+                </ul>
+            </nav>
+            <a href="cart.html">
+                <img src="img/cart.png" width="30px" height="30px">
+            </a>
+            <img src="img/menu1.png" class="menu-icon" onclick="menutoggle()">
+        </div>
+    </div>
+    </div>
+    
+    <div class="payment-container">
+        <div class="order-summary">
+            <h2>Order Summary</h2>
+            <table id="cart-items">
+                <tr>
+                    <th>Product</th>
+                    <th>Quantity</th>
+                    <th>Subtotal</th>
+                </tr>
+            </table>
+            <div class="total-price">
+                <table>
+                    <tr>
+                        <td>Subtotal</td>
+                        <td id="subtotal-price">Rp 0</td>
+                    </tr>
+                    <tr>
+                        <td>Biaya Pengiriman</td>
+                        <td id="shipping-price">Rp 50.000</td>
+                    </tr>
+                    <tr>
+                        <td>Total</td>
+                        <td id="total-price">Rp 0</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+
+        <div class="payment-details">
+            <h2>Payment Details</h2>
+            <form id="payment-form">
+                <div class="form-group">
+                    <label for="name">Full Name</label>
+                    <input type="text" id="name" name="name" required>
+                </div>
+                <div class="form-group">
+                    <label for="address">Shipping Address</label>
+                    <textarea id="address" name="address" required></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="post-code">Post Code</label>
+                    <input type="text" id="post-code" name="Post Code" placeholder=" Example: 61252" required>
+                </div>
+                <div class="form-group">
+                    <label for="payment-method">Order Payment Receipt</label>
+                    <input type="file" id="imageInput" accept="image/*" onchange="uploadToGoogleDrive()">
+                </div>
+                <button type="submit" class="payment-button"><li><a href="cart.html" onclick="processPayment()">Payment</a></li></button>
+            </form>
+        </div>
+    </div>
+    
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-logo">
+                <h3>Galeri Batik Batik</h3>
+                <p>Preserving Tradition, Crafting Art</p>
+            </div>
+  
+            <div class="footer-socials">
+                <p>Follow Us:</p>
+                <a href="#" target="_blank"><img src="img/icons8-facebook-48.png" alt="Facebook"></a>
+                <a href="#" target="_blank"><img src="img/icons8-instagram-48.png" alt="Instagram"></a>
+                <a href="#" target="_blank"><img src="img/icons8-twitterx-48.png" alt="Twitter"></a>
+                <a href="https://www.instagram.com/galeri_batikbatik?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" target="_blank"><img src="img/icons8-youtube-48.png" alt="YouTube"></a>
+            </div>
+  
+            <div class="footer-contact">
+                <p>Contact Us:</p>
+                <a href="tel:+15551234567">Phone: +1 (555) 123-4567</a><br>
+                <a href="mailto:info@galeribatikbatik.com">Email: info@galeribatikbatik.com</a>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+          <p>&copy; 2024 Galeri Batik Batik. All Rights Reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Function to generate unique transaction ID
+        function generateTransactionId() {
+            const timestamp = Date.now();
+            const randomPart = Math.random().toString(36).substring(2, 10);
+            return `TRX-${timestamp}-${randomPart}`;
+        }
+
+        var MenuItems = document.getElementById("MenuItems");
+
+        MenuItems.style.maxHeight = "0px";
+
+        function menutoggle(){
+            if(MenuItems.style.maxHeight == "0px") {
+                MenuItems.style.maxHeight = "200px";
+            } else {
+                MenuItems.style.maxHeight = "0px";
+            }
+        }
+
+        function displayCart() {
+            let cart = JSON.parse(localStorage.getItem('cart')) || [];
+            let cartItemsContainer = document.getElementById('cart-items');
+            let subtotal = 0;
+
+            cartItemsContainer.innerHTML = `
+                <tr>
+                    <th>Product</th>
+                    <th>Quantity</th>
+                    <th>Subtotal</th>
+                </tr>
+            `;
+
+            cart.forEach(item => {
+                const subtotalPrice = item.price * item.quantity;
+                subtotal += subtotalPrice;
+
+                cartItemsContainer.innerHTML += `
+                    <tr>
+                        <td>
+                            <div class="cart-info">
+                                <img src="${item.image}" alt="">
+                                <div>
+                                    <p>${item.name}</p>
+                                    <small>Price: Rp ${item.price.toLocaleString()}</small>
+                                </div>
+                            </div>
+                        </td>
+                        <td>${item.quantity}</td>
+                        <td>Rp ${subtotalPrice.toLocaleString()}</td>
+                    </tr>
+                `;
+            });
+
+            document.getElementById('subtotal-price').innerText = `Rp ${subtotal.toLocaleString()}`;
+            document.getElementById('total-price').innerText = `Rp ${(subtotal + 50000).toLocaleString()}`;
+        }
+
+        // Function to process payment and save transaction
+        function processPayment(e) {
+    e.preventDefault();
+
+    // Get form data
+    const name = document.getElementById('name').value;
+    const address = document.getElementById('address').value;
+    const postCode = document.getElementById('post-code').value;
+
+    // Get cart items
+    const cart = JSON.parse(localStorage.getItem('cart')) || [];
+    
+    // Validasi form
+    if (!name || !address || !postCode) {
+        alert('Harap lengkapi semua data');
+        return;
+    }
+    
+    // Calculate total
+    const subtotal = cart.reduce((total, item) => total + (item.price * item.quantity), 0);
+    const shippingCost = 50000;
+    const total = subtotal + shippingCost;
+
+    // Generate unique transaction ID
+    const transactionId = generateTransactionId();
+
+    // Create transaction object
+    const transaction = {
+        transaction_id: transactionId,
+        customer_name: name,
+        shipping_address: address,
+        post_code: postCode,
+        items: cart,
+        subtotal: subtotal,
+        shipping_cost: shippingCost,
+        total: total,
+        timestamp: new Date().toISOString()
+    };
+
+    // Store transaction
+    let transactions = JSON.parse(localStorage.getItem('transactions') || '[]');
+    transactions.push(transaction);
+    localStorage.setItem('transactions', JSON.stringify(transactions));
+
+    // Clear cart
+    localStorage.removeItem('cart');
+
+    // Tampilkan modal atau alert transaksi berhasil
+    Swal.fire({
+        icon: 'success',
+        title: 'Pembayaran Berhasil!',
+        text: `Nomor Transaksi: ${transactionId}`,
+        confirmButtonText: 'OK'
+    }).then(() => {
+        // Redirect ke halaman cart setelah konfirmasi
+        window.location.href = 'cart.html';
+    });
+}
+
+// Tambahkan event listener di luar fungsi
+document.addEventListener('DOMContentLoaded', () => {
+    const paymentForm = document.getElementById('payment-form');
+    if (paymentForm) {
+        paymentForm.addEventListener('submit', processPayment);
+    }
+});
+        // Attach event listener to payment form
+        document.getElementById('payment-form').addEventListener('submit', processPayment);
+
+        // Load cart items on page load
+        window.onload = displayCart;
+    </script>
+
+<script>
+    async function uploadToGoogleDrive() {
+        const imageFile = document.getElementById('imageInput').files[0];
+        
+        // Buat FormData untuk mengirim file
+        const formData = new FormData();
+        formData.append('file', imageFile);
+    
+        try {
+            const response = await fetch('/api/upload-to-drive', {
+                method: 'POST',
+                body: formData
+            });
+    
+            const result = await response.json();
+            if (result.success) {
+                alert('Gambar berhasil diunggah ke Google Drive');
+                console.log('File URL:', result.fileUrl);
+            } else {
+                alert('Gagal mengunggah gambar');
+            }
+        } catch (error) {
+            console.error('Error:', error);
+        }
+    }
+    </script>
+
+    <!-- ------ js for toggle menu ------ -->
+    <script>
+        var MenuItems = document.getElementById("MenuItems");
+
+        MenuItems.style.maxHeight = "0px";
+
+        function menutoggle(){
+            if(MenuItems.style.maxHeight == "0px") {
+                MenuItems.style.maxHeight = "200px";
+            }
+            else {
+                MenuItems.style.maxHeight = "0px";
+            }
+        }
+    </script>
+</body>
+</html>

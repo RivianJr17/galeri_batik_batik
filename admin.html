@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard - Galeri Batik Batik</title>
+    <link rel="stylesheet" href="admin.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+<body>
+    <div class="sidebar">
+        <div class="logo">
+            <img src="img/logo.png" width="150px">
+        </div>
+        <ul>
+            <li><a href="admin.html">Dashboard</a></li>
+            <li><a href="manage-order.html">Manage Orders</a></li>
+            <li><a href="manage-user.html">Manage Users</a></li>
+        </ul>
+        <div class="button" style="margin-top: 30vmax;">
+            <button type="button"><a href="#" onclick="logout()">Logout</a>
+        </div>
+        </div>
+
+    <div class="main-content">
+        <header>
+            <h1>Admin Dashboard</h1>
+        </header>
+        
+        <section class="stats">
+            <div class="stat-box">
+                <h3>Total Products</h3>
+                <p id="total-products">0</p>
+            </div>
+            <div class="stat-box">
+                <h3>Total Orders</h3>
+                <p id="total-orders">0</p>
+            </div>
+            <div class="stat-box">
+                <h3>Total Revenue</h3>
+                <p id="total-revenue">Rp 0</p>
+            </div>
+        </section>
+
+        <section class="latest-orders">
+            <h2>Latest Orders</h2>
+            <table id="orders-table">
+                <tr>
+                    <th>Order ID</th>
+                    <th>Customer</th>
+                    <th>Status</th>
+                    <th>Total</th>
+                </tr>
+                <!-- Data orders will be dynamically added here -->
+            </table>
+        </section>
+    </div>
+
+    <script>
+        // Dummy data for dashboard
+        function loadDashboardData() {
+            document.getElementById("total-products").innerText = 50;  // Example data
+            document.getElementById("total-orders").innerText = 120;  // Example data
+            document.getElementById("total-revenue").innerText = "Rp 10,000,000";  // Example data
+
+            // Load latest orders
+            const orders = [
+                { orderId: 'ORD001', customer: 'John Doe', status: 'Completed', total: 'Rp 500,000' },
+                { orderId: 'ORD002', customer: 'Jane Doe', status: 'Pending', total: 'Rp 300,000' }
+            ];
+            const ordersTable = document.getElementById("orders-table");
+            orders.forEach(order => {
+                ordersTable.innerHTML += `
+                    <tr>
+                        <td>${order.orderId}</td>
+                        <td>${order.customer}</td>
+                        <td>${order.status}</td>
+                        <td>${order.total}</td>
+                    </tr>
+                `;
+            });
+
+            // Load products list
+            const products = [
+                { productId: 'P001', name: 'Batik Shirt', price: 'Rp 150,000' },
+                { productId: 'P002', name: 'Batik Dress', price: 'Rp 200,000' }
+            ];
+            const productsTable = document.getElementById("products-table");
+            products.forEach(product => {
+                productsTable.innerHTML += `
+                    <tr>
+                        <td>${product.productId}</td>
+                        <td>${product.name}</td>
+                        <td>${product.price}</td>
+                        <td><a href="edit-product.html?id=${product.productId}">Edit</a> | <a href="#" onclick="deleteProduct('${product.productId}')">Delete</a></td>
+                    </tr>
+                `;
+            });
+        }
+
+        // Function to delete a product
+        function deleteProduct(productId) {
+            if (confirm("Are you sure you want to delete this product?")) {
+                // Perform delete operation here (e.g., remove from database)
+                alert("Product deleted");
+                location.reload(); // Reload the page to update the product list
+            }
+        }
+
+        // Logout function
+        function logout() {
+            sessionStorage.removeItem("profile-username");
+            window.location.href = "account.html"; // Redirect to login page
+        }
+
+        // Load dashboard data on page load
+        loadDashboardData();
+    </script>
+</body>
+</html>

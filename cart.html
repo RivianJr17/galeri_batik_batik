@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Galeri Batik-Batik | cart</title>
+        <link rel="stylesheet" href="cart.css">
+        <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    </head>
+<body>
+    <div class="header">
+    <div class="container">
+        <div class="navbar">
+            <div class="logo">
+                <img src="img/logo.png" width="125px">
+            </div>
+            <nav>
+                <ul id="MenuItems">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="products.html">Products</a></li>
+                    <li><a href="gallery.html">Gallery</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                    <li><a href="location.html">Location</a></li>
+                    <li><a href="account.html">Account</a></li>
+                </ul>
+            </nav>
+            <a href="cart.html">
+                <img src="img/cart.png" width="30px" height="30px">
+            </a>
+            <img src="img/menu1.png" class="menu-icon" onclick="menutoggle()">
+        </div>
+    </div>
+    </div>
+    
+    <!-- Cart items details -->
+    <div class="small-container cart-page">
+        <table id="cart-items">
+            <tr>
+                <th>Product</th>
+                <th>Quantity</th>
+                <th>Subtotal</th>
+            </tr>
+        </table>
+        <div class="total-price">
+            <table>
+                <tr>
+                    <td>Subtotal</td>
+                    <td id="subtotal-price">Rp 0</td>
+                </tr>
+                <tr>
+                    <td>Biaya Pengiriman</td>
+                    <td id="shipping-price">Rp 50.000</td>
+                </tr>
+                <tr>
+                    <td>Total</td>
+                    <td id="total-price">Rp 0</td>
+                </tr>
+            </table>
+        </div>
+    </div>
+    
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-logo">
+                <h3>Galeri Batik Batik</h3>
+                <p>Preserving Tradition, Crafting Art</p>
+            </div>
+  
+            <div class="footer-socials">
+                <p>Follow Us:</p>
+                <a href="#" target="_blank"><img src="img/icons8-facebook-48.png" alt="Facebook"></a>
+                <a href="#" target="_blank"><img src="img/icons8-instagram-48.png" alt="Instagram"></a>
+                <a href="#" target="_blank"><img src="img/icons8-twitterx-48.png" alt="Twitter"></a>
+                <a href="https://www.instagram.com/galeri_batikbatik?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" target="_blank"><img src="img/icons8-youtube-48.png" alt="YouTube"></a>
+            </div>
+  
+            <div class="footer-contact">
+                <p>Contact Us:</p>
+                <a href="tel:+15551234567">Phone: +1 (555) 123-4567</a><br>
+                <a href="mailto:info@galeribatikbatik.com">Email: info@galeribatikbatik.com</a>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+          <p>&copy; 2024 Galeri Batik Batik. All Rights Reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Mengecek apakah pengguna sudah login sebelum mengakses halaman cart
+        document.addEventListener("DOMContentLoaded", function () {
+            let currentUser = sessionStorage.getItem("profile-username");
+            if (!currentUser) {
+                alert("Anda harus login terlebih dahulu.");
+                window.location.href = "account.html"; // Redirect ke halaman login
+            }  else {
+            currentUser = JSON.parse(currentUser);
+            document.getElementById("profile-username").textContent = currentUser.username;
+            document.getElementById("profile-email").textContent = currentUser.email;
+        }
+    })
+    </script>
+
+    <!-- JavaScript for Toggle Menu and Cart Management -->
+    <script>
+        var MenuItems = document.getElementById("MenuItems");
+
+        MenuItems.style.maxHeight = "0px";
+
+        function menutoggle(){
+            if(MenuItems.style.maxHeight == "0px") {
+                MenuItems.style.maxHeight = "200px";
+            } else {
+                MenuItems.style.maxHeight = "0px";
+            }
+        }
+
+        function addToCart(name, price, image) {
+        let cart = JSON.parse(localStorage.getItem('cart')) || [];
+
+        // Cek apakah produk sudah ada di keranjang
+        let existingItem = cart.find(item => item.name === name);
+        if (existingItem) {
+            existingItem.quantity += 1;
+        } else {
+            // Tambahkan produk dengan nama, harga, kuantitas, dan path gambar
+            cart.push({ name, price, quantity: 1, image });
+        }
+
+        localStorage.setItem('cart', JSON.stringify(cart));
+        displayCart();
+        }
+
+        function displayCart() {
+            let cart = JSON.parse(localStorage.getItem('cart')) || [];
+            let cartItemsContainer = document.getElementById('cart-items');
+            let subtotal = 0;
+
+            cartItemsContainer.innerHTML = `
+                <tr>
+                    <th>Product</th>
+                    <th>Quantity</th>
+                    <th>Subtotal</th>
+                </tr>
+            `;
+
+            cart.forEach(item => {
+                const subtotalPrice = item.price * item.quantity;
+                subtotal += subtotalPrice;
+
+                cartItemsContainer.innerHTML += `
+                    <tr>
+                        <td>
+                            <div class="cart-info">
+                                <img src="${item.image}" alt="">
+                                <div>
+                                    <p>${item.name}</p>
+                                    <small>Price: Rp ${item.price.toLocaleString()}</small>
+                                    <br>
+                                    <a href="#" onclick="removeFromCart('${item.name}')">Remove</a>
+                                </div>
+                            </div>
+                        </td>
+                        <td><input type="number" value="${item.quantity}" min="1" onchange="updateQuantity('${item.name}', this.value)"></td>
+                        <td>Rp ${subtotalPrice.toLocaleString()}</td>
+                    </tr>
+                `;
+            });
+
+            document.getElementById('subtotal-price').innerText = `Rp ${subtotal.toLocaleString()}`;
+            document.getElementById('total-price').innerText = `Rp ${(subtotal + 50000).toLocaleString()}`;
+        }
+
+        function updateQuantity(name, quantity) {
+            let cart = JSON.parse(localStorage.getItem('cart')) || [];
+
+            let item = cart.find(item => item.name === name);
+            if (item) {
+                item.quantity = parseInt(quantity);
+                if (item.quantity <= 0) {
+                    cart = cart.filter(item => item.name !== name);
+                }
+                localStorage.setItem('cart', JSON.stringify(cart));
+                displayCart();
+            }
+        }
+
+        function removeFromCart(name) {
+            let cart = JSON.parse(localStorage.getItem('cart')) || [];
+
+            cart = cart.filter(item => item.name !== name);
+            localStorage.setItem('cart', JSON.stringify(cart));
+            displayCart();
+        }
+
+        // Load cart items on page load
+        window.onload = displayCart;
+    </script>
+
+</body>
+</html>

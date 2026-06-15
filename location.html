@@ -1,0 +1,111 @@
+<html lang="en">
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Galeri Batik Batik | Location</title>
+        <link rel="stylesheet" href="location.css">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.6.0/css/fontawesome.min.css">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    </head>
+    
+    <body>
+        <div class="header">
+        <div class="container">
+            <div class="navbar">
+                <div class="logo">
+                    <img src="img/logo.png" width="125px">
+                </div>
+                <nav>
+                    <ul id = "MenuItems">
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="products.html">Products</a></li>
+                        <li><a href="gallery.html">Gallery</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                        <li><a href="location.html">Location</a></li>
+                        <li><a href="account.html">Account</a></li>
+                    </ul>
+                </nav>
+                <a href="cart.html">
+                    <img src="img/cart.png" width="30px" height="30px">
+                </a>
+                <img src="img/menu1.png" class="menu-icon" onclick="menutoggle()">
+            </div>
+            <h1 style="margin-top: 50px;">Lokasi Galeri Batik Batik</h1>
+        </div>
+
+    
+<div class="row">
+    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3952.6281409577873!2d112.0185341!3d-7.8291233!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e78572de9d21dfb%3A0x19b0b724d514e917!2sGaleri%20Batik-Batik!5e0!3m2!1sen!2sid!4v1731055762528!5m2!1sen!2sid"
+    style="border:0;" 
+    allowfullscreen="" 
+    loading="lazy" 
+    class="map-batik"
+    referrerpolicy="no-referrer-when-downgrade">
+    </iframe>
+
+
+    <div class="contact-form">
+        <h3>Address and Contact Information</h3>
+        <p><strong>Galeri Batik Batik</strong></p>
+        <p>Jl. Letjend. Mt. Haryono No.23,<br>
+           Singonegaran, Kec. Pesantren,<br>
+           Kota Kediri, Jawa Timur 64132</p>
+        <p><strong>Phone:</strong> +62 813 3545 3615</p>
+        <p><strong>Email:</strong> info@galeribatikbatik.com</p>
+        <p><strong>Hours:</strong> Monday - Saturday: 8:00 - 18:00 WIB<br>
+            Sunday: Closed</p>
+    </div>
+</div>
+
+  <!-- ------footer------ -->
+  <footer class="footer">
+    <div class="footer-content">
+        <div class="footer-logo">
+            <h3>Galeri Batik Batik</h3>
+            <p>Preserving Tradition, Crafting Art</p>
+        </div>
+
+        <div class="footer-socials">
+            <p>Follow Us:</p>
+            <a href="#" target="_blank"><img src="img/icons8-facebook-48.png" alt="Facebook"></a>
+            <a href="https://www.instagram.com/galeri_batikbatik?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" target="_blank"><img src="img/icons8-instagram-48.png" alt="Instagram"></a>
+            <a href="#" target="_blank"><img src="img/icons8-twitterx-48.png" alt="Twitter"></a>
+            <a href="https://www.instagram.com/galeri_batikbatik?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" target="_blank"><img src="img/icons8-youtube-48.png" alt="YouTube"></a>
+        </div>
+
+        <div class="footer-contact">
+            <p>Contact Us:</p>
+            <a href="tel:+62 813 3545 3615">Phone: +62 813 3545 3615</a><br>
+            <a href="mailto:galeri.batikbatik.kdr@gmail.com">Email: galeri.batikbatik.kdr@gmail.com</a>
+        </div>
+    </div>
+
+    <div class="footer-bottom">
+      <p>&copy; 2024 Galeri Batik Batik. All Rights Reserved.</p>
+    </div>
+</footer>
+    
+<!-- ------ js for toggle menu ------ -->
+
+<script>
+    var MenuItems = document.getElementById("MenuItems");
+
+    MenuItems.style.maxHeight = "0px";
+
+    function menutoggle(){
+        if(MenuItems.style.maxHeight == "0px") {
+            MenuItems.style.maxHeight = "200px";
+        }
+        else {
+            MenuItems.style.maxHeight = "0px";
+        }
+    }
+</script>
+
+</body>
+</html>

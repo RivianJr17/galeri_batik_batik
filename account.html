@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Galeri Batik Batik | Account</title>
+    <link rel="stylesheet" href="account.css">
+</head>
+<body>
+    <div class="header">
+    <div class="container">
+        <div class="navbar">
+            <div class="logo">
+               <img src="img/logo.jpg" width="125px">
+            </div>
+            <nav>
+                <ul id = "MenuItems">
+                    <li><a href="index.html">Home</a></li>
+                </ul>
+            </nav>
+            <img src="img/menu1.png" class="menu-icon" onclick="menutoggle()">
+        </div>
+    </div>    
+
+    <div class="container">
+        <!-- Form Login -->
+        <div class="form-container" id="login-form">
+            <h2>Login</h2>
+            <form onsubmit="return loginUser()">
+                <input type="text" id="login-username" placeholder="Username" required>
+                <input type="password" id="login-password" placeholder="Password" required><br>
+                <button type="submit">Login</button><br><br>
+                <p>Belum punya akun? <a href="#" onclick="showRegister()">Daftar</a></p>
+            </form>
+        </div>
+
+        <!-- Form Register -->
+        <div class="form-container" id="register-form" style="display: none;">
+            <h2>Register</h2>
+            <form onsubmit="return registerUser()">
+                <input type="text" id="register-Email" placeholder="Email" required>
+                <input type="text" id="register-username" placeholder="Username" required>
+                <input type="password" id="register-password" placeholder="Password" required>
+                <input type="text" id="register-phone" placeholder="Phone Number" required><br>
+                <button type="submit">Daftar</button><br><br>
+                <p>Sudah punya akun? <a href="#" onclick="showLogin()">Login</a></p>
+            </form>
+        </div>
+        <!-- Profil Pengguna -->
+        <div class="profile-container" id="profile" style="display: none;">
+            <h2>Profil Pengguna</h2>
+            <p>Username: <span id="profile-username"></span></p><br>
+            <p>Email: <span id="profile-email"></span></p><br>
+            <p>Phone Number: <span id="profile-phone"></span></p><br>
+            <button onclick="logout()">Logout</button>
+        </div>
+    </div>
+
+    <script src="account.js"></script>
+
+</body>
+</html>

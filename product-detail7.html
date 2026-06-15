@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Galeri Batik-Batik</title>
+        <link rel="stylesheet" href="product-detail.css">
+        <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    </head>
+<body>
+
+    <body>
+        <div class="header">
+        <div class="container">
+            <div class="navbar">
+                <div class="logo">
+                    <img src="img/logo.png" width="125px">
+                </div>
+                <nav>
+                    <ul id="MenuItems">
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="products.html">Products</a></li>
+                        <li><a href="gallery.html">Gallery</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                        <li><a href="location.html">Location</a></li>
+                        <li><a href="account.html">Account</a></li>
+                    </ul>
+                </nav>
+                <a href="cart.html">
+                    <img src="img/cart.png" width="30px" height="30px">
+                </a>
+                <img src="img/menu.png" class="menu-icon" onclick="menutoggle()">
+            </div>
+        </div>
+        </div>
+        <!-- -----single product details----- -->
+         <div class="small-container single-product">
+            <div class="row">
+                <div class="col-2">
+                    <img src="img/kain7.jpg" width="100%">
+                </div>
+                <div class="col-2">
+                    <p>Home / Kain</p>
+                    <h1>Kain Batik Print</h1>
+                    <h4>Rp 150.000,00</h4>
+                    <input type="number" value="1" min="1" id="product-quantity" onchange="validateQuantity(this)">
+                    <a href="#" class="btn" onclick="addToCart('Kain Batik Print', 150000, document.querySelector('input[type=number]').value)">Add To Cart</a>
+
+                    <h3>Product Details <i class="fa fa-indent"></i></h3>
+                    <br>
+                    <p>Ukuran 240cm X 115cm</p>
+                </div>
+            </div>
+         </div>
+        <!-- -----title----- -->
+         <div class="small-container">
+            <div class="row row-2">
+                <h2>Related Products</h2>
+                <p>View More</p>
+            </div>
+         </div>
+         <!-- -----prodducts----- -->
+        <div class="small-container">
+            <div class="row">
+                
+            </div>
+            <div class="row">
+                <div class="col-4">
+                    <a href="product-detail9.html">
+                        <img src="img/kain9.jpg">
+                    </a>
+                    <h4>Kain Batik Print</h4>
+                    <div class="rating">
+                        <i class="fa fa-star" aria-hidden="true"></i>
+                        <i class="fa fa-star" aria-hidden="true"></i>
+                        <i class="fa fa-star" aria-hidden="true"></i>
+                        <i class="fa fa-star" aria-hidden="true"></i>
+                        <i class="fa fa-star-o" aria-hidden="true"></i>
+                    </div>
+                    <p>Rp 150.000,00</p>
+                </div>
+                <div class="col-4">
+                    <a href="product-detail10.html">
+                        <img src="img/kain10.jpg">
+                    </a>
+                    <h4>Kain Batik Print</h4>
+                    <div class="rating">
+                        <i class="fa fa-star" aria-hidden="true"></i>
+                        <i class="fa fa-star" aria-hidden="true"></i>
+                        <i class="fa fa-star" aria-hidden="true"></i>
+                        <i class="fa fa-star-half-o" aria-hidden="true"></i>
+                        <i class="fa fa-star-o" aria-hidden="true"></i>
+                    </div>
+                    <p>Rp 150.000,00</p>
+                </div>
+                <div class="col-4">
+                    <a href="product-detail11.html">
+                        <img src="img/kain11.jpg">
+                    </a>
+                    <h4>Kain Batik Print</h4>
+                    <div class="rating">
+                        <i class="fa fa-star" aria-hidden="true"></i>
+                        <i class="fa fa-star" aria-hidden="true"></i>
+                        <i class="fa fa-star" aria-hidden="true"></i>
+                        <i class="fa fa-star" aria-hidden="true"></i>
+                        <i class="fa fa-star-half-o" aria-hidden="true"></i>
+                    </div>
+                    <p>Rp 150.000,00</p>
+                </div>
+                <div class="col-4">
+                    <a href="product-detail8.html">
+                        <img src="img/kain8.jpg">
+                    </a>
+                    <h4>Kain Batik Print</h4>
+                    <div class="rating">
+                        <i class="fa fa-star" aria-hidden="true"></i>
+                        <i class="fa fa-star" aria-hidden="true"></i>
+                        <i class="fa fa-star" aria-hidden="true"></i>
+                        <i class="fa fa-star-o" aria-hidden="true"></i>
+                        <i class="fa fa-star-o" aria-hidden="true"></i>
+                    </div>
+                    <p>Rp 150.000,00</p>
+                </div>
+            </div>
+            
+
+
+        <!-- ------footer------ -->
+        <footer class="footer">
+            <div class="footer-content">
+                <div class="footer-logo">
+                    <h3>Galeri Batik Batik</h3>
+                    <p>Preserving Tradition, Crafting Art</p>
+                </div>
+      
+                <div class="footer-socials">
+                    <p>Follow Us:</p>
+                    <a href="#" target="_blank"><img src="img/icons8-facebook-48.png" alt="Facebook"></a>
+                    <a href="#" target="_blank"><img src="img/icons8-instagram-48.png" alt="Instagram"></a>
+                    <a href="#" target="_blank"><img src="img/icons8-twitterx-48.png" alt="Twitter"></a>
+                    <a href="#" target="_blank"><img src="img/icons8-youtube-48.png" alt="YouTube"></a>
+                </div>
+      
+                <div class="footer-contact">
+                    <p>Contact Us:</p>
+                    <a href="tel:+62 813 3545 3615">Phone: +62 813 3545 3615</a><br>
+                    <a href="mailto:info@galeribatikbatik.com">Email: info@galeribatikbatik.com</a>
+                </div>
+            </div>
+    
+            <div class="footer-bottom">
+              <p>&copy; 2024 Galeri Batik Batik. All Rights Reserved.</p>
+            </div>
+        </footer>
+        <!-- ------ js for toggle menu ------ -->
+        <script>
+            var MenuItems = document.getElementById("MenuItems");
+
+            MenuItems.style.maxHeight = "0px";
+
+            function menutoggle(){
+                if(MenuItems.style.maxHeight == "0px") {
+                    MenuItems.style.maxHeight = "200px";
+                }
+                else {
+                    MenuItems.style.maxHeight = "0px";
+                }
+            }
+
+            function validateQuantity(input) {
+                if (input.value < 1) {
+                    input.value = 1; // Set to minimum value of 1
+                }
+            }
+            
+            function addToCart(productName, price, quantity) {
+                // Ambil cart dari localStorage
+                let cart = JSON.parse(localStorage.getItem('cart')) || [];
+
+                // Cek apakah produk sudah ada di cart
+                const existingProduct = cart.find(item => item.name === productName);
+                if (existingProduct) {
+                    existingProduct.quantity += parseInt(quantity); // Tambah jumlah jika sudah ada
+                } else {
+                    cart.push({ name: productName, price: price, quantity: parseInt(quantity) }); // Tambah produk baru
+                }
+
+                // Simpan kembali cart ke localStorage
+                localStorage.setItem('cart', JSON.stringify(cart));
+
+                alert(productName + ' has been added to your cart!');
+            }
+        </script>
+
+        </body>
+</html>
